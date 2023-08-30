@@ -1,5 +1,6 @@
-export default function EditaProduto(){
-    <main>
+export default function EditaProdutos(){
+    <div>
         <h1>editando o produto</h1>
-    </main>
+    </div>
+    
 }
