@@ -1,6 +1,6 @@
 export default function EditaProdutos(){
     <div>
-        <h1>editando o produto</h1>
+        <h1>editando o produtos</h1>
     </div>
     
 }
