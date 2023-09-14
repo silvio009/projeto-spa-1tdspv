@@ -1,23 +1,21 @@
+
 .tableStyle{
     border: 2px solid #ccc;
     margin: 0 auto;
     border-collapse: collapse;
-    
-    .tableHeaderStyles{
-        background-color: #f1f1c1;
-        border:  2px solid #ccc;
+
+    .tableHeaderStyle{
+        background-color:#f1f1c1;
+        border: 2px solid #ccc;
     }
 
-    .tableDataStyles{
-        text-align: left; 
-        border:  2px solid #ccc;
-
-    }
-    .tableLineStyles:hover{
-     background-color: #cccc;
-     
+    .tableDataStyle{
+        text-align: left;
+        border: 2px solid #ccc;
     }
 
+    .tableLineStyle:hover{
+        background-color: #cccc;
+    }
 
-    
 }
