@@ -74,11 +74,24 @@ export default function Produtos() {
                   <td className={classes.tableDataStyle}><Link to={`/editar/produtos/${produto.id}`}><Editar/></Link> | <Link to={`/excluir/produtos/${produto.id}`}><Excluir/></Link></td>
                 </tr>
               ))} 
+              {Teste.length > 0 && (
+                <tr className={classes.tableLineStyle}>
+                  <td className={classes.tableDataStyle}>{teste.length}</td>
+                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].id}</td>
+                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].nome}</td>
+                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].desc}</td>
+                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].preco}</td>
+                </tr>
+              )}
             </tbody>
             <tfoot>
               <tr>
                 <td colSpan="4" className={classes.tableDataStyle}>Total de Produtos: {ListaProdutos.length}</td>
               </tr>
+                <tr>
+                  <button className={classes.tableDataStyle}><Link to={"/criar/produto"}>Adicionar Produtos</Link></button>
+                </tr>
+              
             </tfoot>
           </table>
         </div>
