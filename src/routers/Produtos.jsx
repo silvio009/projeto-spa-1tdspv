@@ -1,102 +1,58 @@
-import { ListaProdutos } from "../components/ListaProdutos";
+import React from "react";
 import { Link } from "react-router-dom";
-import {AiFillEdit as Editar, AiOutlineDelete as Excluir} from "react-icons/ai";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { ListaProdutos } from "../components/ListaProdutos";
 import classes from "./Produtos.module.css";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Produtos() {
-
-    document.title = "Lista de Produtos";
-
-
-
-
-
-
-
-
-
-    const [exemplo, setExemplo] = useState([{}]);
-
-
-    const [count, setCont] = useState(0);
-
-    useEffect(()=>{
-      console.log("Use-Effect que será sempre renderizado!");
-
-    });
-
-
-    useEffect(()=>{
-      console.log("Use-Effect que será renderizado apenas uma (1)  vez");
-
-      setExemplo(ListaProdutos);
-
-    },[]);
-
-    
-    useEffect(()=>{
-      
-      console.log("Use-Effect que será renderizado o obj ou componente ou elemento");
-  
-    },[count]);
-  
-   
-
+    const navigate = useNavigate();
 
     return (
-      <div>
-          <h1>LISTA DE PRODUTOS</h1>
-        <div>
-          <button onClick={()=> setCont(count + 1)}>count- {count}</button>
-        </div>
+        <main className={classes.centralizar}>
+            <h1 className={classes.titulo}>LISTA DE PRODUTOS</h1>
+            <button className={classes.adicionar} onClick={() => navigate('/produtos/adicionar')}>Adicionar Produto</button>
 
-        <div>
-          <table className={classes.tableStyle}>
-            <thead>
-              <tr className={classes.tableHeaderStyle}>
-                <th className={classes.tableHeaderStyle}>ID</th>
-                <th className={classes.tableHeaderStyle}>Nome</th>
-                <th className={classes.tableHeaderStyle}>Descrição</th>
-                <th className={classes.tableHeaderStyle}>Preço</th>
-                <th className={classes.tableHeaderStyle}>imagem</th>
-                <th className={classes.tableHeaderStyle}>Editar/Excluir</th>
-                </tr>
-            </thead>
-            <tbody>
-              {exemplo.map((produto, index) => (
-                <tr key={index} className={classes.tableLineStyle}>
-                  <td className={classes.tableDataStyle}>{produto.id}</td>
-                  <td className={classes.tableDataStyle}>{produto.nome}</td>
-                  <td className={classes.tableDataStyle}>{produto.desc}</td>
-                  <td className={classes.tableDataStyle}>{produto.preco}</td>
-                  <td className={classes.tableDataStyle}><img src={produto.img} alt={produto.desc} /></td>
-                  <td className={classes.tableDataStyle}><Link to={`/editar/produtos/${produto.id}`}><Editar/></Link> | <Link to={`/excluir/produtos/${produto.id}`}><Excluir/></Link></td>
-                </tr>
-              ))} 
-              {Teste.length > 0 && (
-                <tr className={classes.tableLineStyle}>
-                  <td className={classes.tableDataStyle}>{teste.length}</td>
-                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].id}</td>
-                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].nome}</td>
-                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].desc}</td>
-                  <td className={classes.tableDataStyle}>{teste[teste.length - 1].preco}</td>
-                </tr>
-              )}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="4" className={classes.tableDataStyle}>Total de Produtos: {ListaProdutos.length}</td>
-              </tr>
-                <tr>
-                  <button className={classes.tableDataStyle}><Link to={"/criar/produto"}>Adicionar Produtos</Link></button>
-                </tr>
-              
-            </tfoot>
-          </table>
-        </div>
+            <table className={classes.tableStyle}>
+                <thead>
+                    <tr className={classes.tableHeaderStyle}>
+                        <th className={classes.tableHeaderStyle}>ID</th>
+                        <th className={classes.tableHeaderStyle}>Nome</th>
+                        <th className={classes.tableHeaderStyle}>Descrição</th>
+                        <th className={classes.tableHeaderStyle}>Preço</th>
+                        <th className={classes.tableHeaderStyle}>Imagem</th>
+                        <th className={classes.tableHeaderStyle}>Editar/Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {ListaProdutos.map((produto, index) => (
+                        <tr key={index} className={classes.tableLineStyle}>
+                            <td className={classes.tableDataStyle}>{produto.id}</td>
+                            <td className={classes.tableDataStyle}>{produto.nome}</td>
+                            <td className={classes.tableDataStyle}>{produto.desc}</td>
+                            <td className={classes.tableDataStyle}>{produto.preco}</td>
+                            <td className={classes.tableDataStyle}><img className={classes.tableDataImgStyle} src={produto.img} alt={produto.desc} /></td>
+                            <td className={classes.tableDataButtonStyle}>
+                                <Link to={`/produtos/editar/${produto.id}`}>
+                                    <FaEdit size={24} color="green" />
+                                </Link>
+                                <Link to={`/produtos/excluir/${produto.id}`}>
+                                    <FaTrash size={24} color="red" />
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan='5' className={classes.tableDataStyle}>
+                            <strong>Total de produtos:</strong>
+                            {ListaProdutos.length}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
 
-      </div>
+        </main>
     )
-  }
-  
+}

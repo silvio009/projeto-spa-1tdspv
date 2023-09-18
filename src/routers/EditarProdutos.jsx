@@ -1,90 +1,83 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { ListaProdutos } from "../components/ListaProdutos";
-import { useState } from "react";
-
-export default function EditarProdutos() {
-  //Utilizar o HOOK useParams() para recuperar o ID passado no path
-  const { id } = useParams();
-
-  document.title = "EDITAR PRODUTOS " + id;
-
-  const navigate = useNavigate();
-
-  const produtoRetornadoDoFiltro = ListaProdutos.filter(
-    (produto) => produto.id == id
-  )[0];
-
-  //useState()
-  const [produto, setProduto] = useState({
-    id: produtoRetornadoDoFiltro.id,
-    nome: produtoRetornadoDoFiltro.nome,
-    desc: produtoRetornadoDoFiltro.desc,
-    preco: produtoRetornadoDoFiltro.preco,
-    img: produtoRetornadoDoFiltro.img,
-  });
-
-  const handleChange = (event) =>{
-
-    //Destructuring
-    const {name, value} = event.target;
-
-    setProduto({...produto,[name]:value});
-  
-  }
-
-  const handleSubmit = (event) =>{
-     event.preventDefault();
-
-     let indice;
-
-     ListaProdutos.forEach((item,index)=>{
-        if(item.id == id){
-          indice = index;
-        }
-     });
-     ListaProdutos.splice(indice,1,produto);
-     navigate("/produtos");
-  }
+import { useParams, useNavigate } from 'react-router-dom';
+import { ListaProdutos } from '../components/ListaProdutos';
+import { useState } from 'react';
 
 
-  return (
-    <div>
-      <h1>EditarProdutos</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>Produto Selecionado</legend>
-            <input type="hidden" name="id" value={produto.id} />
-            <div>
-              <label htmlFor="idProd">Nome do Produto</label>
-              <input type="text" name="nome" id="idProd" onChange={handleChange} value={produto.nome} />
-            </div>
-            <div>
-              <label htmlFor="idDesc">Descrição</label>
-              <input type="text" name="desc" id="idDesc" onChange={handleChange} value={produto.desc} />
-            </div>
-            <div>
-              <label htmlFor="idPreco">Preço</label>
-              <input
-                type="text"
-                name="preco"
-                id="idPreco"
-                onChange={handleChange}
-                value={produto.preco}
-              />
-            </div>
-            <div>
-              <button>EDITAR</button>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+export default function EditarProduto() {
+    const { id } = useParams()
+    const navigate = useNavigate()
 
-        <div>
-          <p>Nome : {produto.nome}</p>
-          <p>Desc : {produto.desc}</p>
-          <p>Preço : {produto.preco}</p>
-        </div>
-    </div>
-  );
+    const produtoSelecionado = ListaProdutos.filter(produto => produto.id == id)[0];
+
+    const [produto, setProduto] = useState({
+        id: produtoSelecionado.id,
+        nome: produtoSelecionado.nome,
+        desc: produtoSelecionado.desc,
+        preco: produtoSelecionado.preco,
+        img: produtoSelecionado.img
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProduto({ ...produto, [name]: value })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        let indice = 0;
+        ListaProdutos.forEach((item, index) => {
+            if (item.id == id) {
+                indice = index;
+            }
+        })
+
+        ListaProdutos.splice(indice, 1, produto);
+        navigate('/produtos')
+    }
+
+    return (
+        <main>
+            <h1>EDITAR PRODUTO</h1>
+
+            <form onSubmit={handleSubmit}>
+                <fieldset>
+                    <legend>Produto Selecionado</legend>
+                    <img src={produto.img} alt={produto.desc} />
+                    <div>
+                        <label htmlFor="idNome">Nome:</label>
+                        <input
+                            type="text"
+                            name='nome'
+                            id='idNome'
+                            value={produto.nome}
+                            onChange={(e) => handleChange(e)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="idDesc">Descrição:</label>
+                        <textarea
+                            name='desc'
+                            id='idDesc'
+                            value={produto.desc}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="idPreco">Preço:</label>
+                        <input
+                            
+                            type="number"
+                            min="0"
+                            name='preco'
+                            id='idPreco'
+                            value={produto.preco}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button type="submit">Salvar Edição</button>
+                </fieldset>
+            </form>
+        </main>
+    )
 }
