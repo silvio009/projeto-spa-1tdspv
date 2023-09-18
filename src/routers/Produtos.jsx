@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+
 import { ListaProdutos } from "../components/ListaProdutos";
 import classes from "./Produtos.module.css";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ export default function Produtos() {
     return (
         <main className={classes.centralizar}>
             <h1 className={classes.titulo}>LISTA DE PRODUTOS</h1>
-            <button className={classes.adicionar} onClick={() => navigate('/produtos/adicionar')}>Adicionar Produto</button>
+            
 
             <table className={classes.tableStyle}>
                 <thead>
@@ -34,12 +35,13 @@ export default function Produtos() {
                             <td className={classes.tableDataStyle}><img className={classes.tableDataImgStyle} src={produto.img} alt={produto.desc} /></td>
                             <td className={classes.tableDataButtonStyle}>
                                 <Link to={`/produtos/editar/${produto.id}`}>
-                                    <FaEdit size={24} color="green" />
+                                    <FiEdit2 />
                                 </Link>
                                 <Link to={`/produtos/excluir/${produto.id}`}>
-                                    <FaTrash size={24} color="red" />
+                                    <FiTrash2 />
                                 </Link>
                             </td>
+                           
                         </tr>
                     ))}
                 </tbody>
@@ -52,6 +54,7 @@ export default function Produtos() {
                     </tr>
                 </tfoot>
             </table>
+                     <button  className={classes.tableDataStyle} onClick={() => navigate('/produtos/adicionar')}>Adicionar Produto</button>
 
         </main>
     )

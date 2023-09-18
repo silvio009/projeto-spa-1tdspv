@@ -1,52 +1,53 @@
 import{ListaProdutos} from "../components/ListaProdutos"
 import { useNavigate } from "react-router-dom";
+import style from './AdionarProduto.module.css'
 
 export default function AdicionarProduto(){
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const AoAdicionar = (event) => {
+        event.preventDefault();
 
-        const { nome, desc, preco, img } = e.target;
+        const { nome, desc, preco, img } = event.target;
         
-        if(!nome.value || !desc.value || !preco.value || !img.value){
-            alert('Preencha todos os campos!');
-            return;
-        }
+      
 
         const novoProduto = {
             id: ListaProdutos.length + 1,
             nome: nome.value,
             desc: desc.value,
             preco: preco.value,
-            img: img ? img.value : "https://picsum.photos/100/100"
+            img: img.value 
         }
         console.log(novoProduto);
         ListaProdutos.push(novoProduto);
         navigate('/produtos')
+        alert("produto adicionando com sucesso!!!")
     }
+
+   
 
     return(
         <main>
             <h1>Adicionar Produto</h1>
-            <form onSubmit={handleSubmit}>
+            <form className={style.form} onSubmit={AoAdicionar}>
                 <fieldset >
-                    <legend >Novo Produto</legend>
+                    <legend >Informações do novo produto</legend>
                     <div >
-                        <label htmlFor="idNome">Nome:</label>
-                        <input  type="text" name='nome' id='idNome' />
+                        <label htmlFor="idNome" obrigatorio = {true}  >Nome:</label>
+                        <input  type="text" name='nome' id='idNome' placeholder="O nome do produto..."  required  />
                     </div>
                     <div>
-                        <label  htmlFor="idDesc">Descrição:</label>
-                        <input  type="text" name='desc' id='idDesc' />
+                        <label  htmlFor="idDesc"  >Descrição:</label>
+                        <input  type="text" name='desc' id='idDesc' placeholder=" O descrição do produto..." required  />
                     </div>
                     <div >
-                        <label  htmlFor="idPreco">Preço:</label>
-                        <input  type="number" min="0" name='preco' id='idPreco' />
+                        <label  htmlFor="idPreco" >Preço:</label>
+                        <input  type="number" min="0" name='preco' id='idPreco' placeholder="O preço do produto..." required  />
                     </div>
                     <div >
-                        <label htmlFor="idImg">Imagem:</label>
-                        <input type="text" name='img' id='idImg' />
+                        <label htmlFor="idImg" >Imagem:</label>
+                        <input type="text" name='img' id='idImg'  placeholder="https://endereçodaimagem/" required pattern="https://.*" />
                     </div>
                     <button type="submit">Adicionar</button>
                 </fieldset>
