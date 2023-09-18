@@ -30,26 +30,26 @@ export default function AdicionarProduto(){
     return(
         <main>
             <h1>Adicionar Produto</h1>
-            <form className={style.form} onSubmit={AoAdicionar}>
-                <fieldset >
-                    <legend >Informações do novo produto</legend>
-                    <div >
-                        <label htmlFor="idNome" obrigatorio = {true}  >Nome:</label>
-                        <input  type="text" name='nome' id='idNome' placeholder="O nome do produto..."  required  />
+            <form className={style.AdionarProduto} onSubmit={AoAdicionar}>
+                <fieldset className={style.form} >
+                   
+                    <div  >
+                        <label  htmlFor="idNome" obrigatorio = {true}   >Nome:</label>
+                        <input className={style.caixatexto} type="text" name='nome' id='idNome' placeholder="O nome do produto..."  required  />
                     </div>
                     <div>
                         <label  htmlFor="idDesc"  >Descrição:</label>
-                        <input  type="text" name='desc' id='idDesc' placeholder=" O descrição do produto..." required  />
+                        <input  className={style.caixatexto}  type="text" name='desc' id='idDesc' placeholder=" O descrição do produto..." required  />
                     </div>
                     <div >
                         <label  htmlFor="idPreco" >Preço:</label>
-                        <input  type="number" min="0" name='preco' id='idPreco' placeholder="O preço do produto..." required  />
+                        <input  className={style.caixatexto}  type="number" min="0" name='preco' id='idPreco' placeholder="O preço do produto..." required  />
                     </div>
                     <div >
                         <label htmlFor="idImg" >Imagem:</label>
-                        <input type="text" name='img' id='idImg'  placeholder="https://endereçodaimagem/" required pattern="https://.*" />
+                        <input   className={style.caixatexto} type="text" name='img' id='idImg'  placeholder="https://endereçodaimagem/" required pattern="https://.*" />
                     </div>
-                    <button type="submit">Adicionar</button>
+                    <button className={style.botao} type="submit">Adicionar</button>
                 </fieldset>
             </form>
         </main>

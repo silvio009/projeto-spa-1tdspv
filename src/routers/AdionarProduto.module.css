@@ -1,5 +1,35 @@
 .AdionarProduto{
         .form{
+            font-family: Verdana, Arial, sans-serif;
+            font-size: smaller;
             margin: 10%;
+            background-color: #F2F2F2;
+            color: black;
+            
+
+            
+
+             .botao{
+                background-color: #6278f7;
+                margin: 2%;
+            }
+
+            .caixatexto{
+                width: 50%;
+                margin: 1%;
+                border: 1px solid black;
+                box-shadow: 2%;
+                background-color: #F2F2F2;
+            }
+            & label{
+                text-align: left;
+                letter-spacing: 6px;
+                font-size: 1.2em;
+                font-weight: normal;
+                width: 450px;
+                color: black;
+            }
         }
+
+        
 }
