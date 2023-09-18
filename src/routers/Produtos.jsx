@@ -52,9 +52,9 @@ export default function Produtos() {
                             {ListaProdutos.length}
                         </td>
                     </tr>
+                     <button  className={classes.botaoAdicionar} onClick={() => navigate('/produtos/adicionar')}>Adicionar Produto</button>
                 </tfoot>
             </table>
-                     <button  className={classes.tableDataStyle} onClick={() => navigate('/produtos/adicionar')}>Adicionar Produto</button>
 
         </main>
     )
