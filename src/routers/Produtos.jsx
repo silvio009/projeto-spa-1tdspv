@@ -8,48 +8,28 @@ export default function Produtos() {
 
     document.title = "Lista de Produtos";
 
-
-
-
-
-
-
-
-
-    const [exemplo, setExemplo] = useState([{}]);
-
-
-    const [count, setCont] = useState(0);
+    const [listaProdutoLocal, setListaProdutoLocal] = useState([{}])
 
     useEffect(()=>{
-      console.log("Use-Effect que será sempre renderizado!");
 
-    });
+        fetch('http://localhost:5000/produtos',{
 
-
-    useEffect(()=>{
-      console.log("Use-Effect que será renderizado apenas uma (1)  vez");
-
-      setExemplo(ListaProdutos);
-
-    },[]);
-
-    
-    useEffect(()=>{
+          method: 'GET',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+        }).then((response)=> response.json())
+        .then((data)=>{
+            setListaProdutoLocal(data);
+        })
+        .catch((err)=>console.log(err));
       
-      console.log("Use-Effect que será renderizado o obj ou componente ou elemento");
-  
-    },[count]);
-  
-   
-
+    },[]);
 
     return (
       <div>
           <h1>LISTA DE PRODUTOS</h1>
-        <div>
-          <button onClick={()=> setCont(count + 1)}>count- {count}</button>
-        </div>
+
 
         <div>
           <table className={classes.tableStyle}>
@@ -59,12 +39,12 @@ export default function Produtos() {
                 <th className={classes.tableHeaderStyle}>Nome</th>
                 <th className={classes.tableHeaderStyle}>Descrição</th>
                 <th className={classes.tableHeaderStyle}>Preço</th>
-                <th className={classes.tableHeaderStyle}>imagem</th>
+                <th className={classes.tableHeaderStyle}>Imagem</th>
                 <th className={classes.tableHeaderStyle}>Editar/Excluir</th>
                 </tr>
             </thead>
             <tbody>
-              {exemplo.map((produto, index) => (
+              {listaProdutoLocal.map((produto, index) => (
                 <tr key={index} className={classes.tableLineStyle}>
                   <td className={classes.tableDataStyle}>{produto.id}</td>
                   <td className={classes.tableDataStyle}>{produto.nome}</td>
@@ -77,7 +57,7 @@ export default function Produtos() {
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan="4" className={classes.tableDataStyle}>Total de Produtos: {ListaProdutos.length}</td>
+                <td colSpan="5" className={classes.tableDataStyle}>Total de Produtos: {ListaProdutos.length}</td>
               </tr>
             </tfoot>
           </table>
@@ -86,4 +66,3 @@ export default function Produtos() {
       </div>
     )
   }
-  
