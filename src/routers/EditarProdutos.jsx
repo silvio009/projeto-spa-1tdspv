@@ -21,15 +21,13 @@ export default function EditarProdutos() {
     desc: produtoRetornadoDoFiltro.desc,
     preco: produtoRetornadoDoFiltro.preco,
     img: produtoRetornadoDoFiltro.img,
+    
   });
 
   const handleChange = (event) =>{
-
     //Destructuring
     const {name, value} = event.target;
-
     setProduto({...produto,[name]:value});
-  
   }
 
   const handleSubmit = (event) =>{
